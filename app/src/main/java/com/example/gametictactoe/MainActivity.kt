@@ -21,12 +21,13 @@
         lateinit var player2score : TextView
         lateinit var mediaPlayer_winning: MediaPlayer
         lateinit var mediaPlayer_x_o_btn: MediaPlayer
+
         // Player Score
         private var player1point : Int = 0
         private var player2point : Int = 0
+
         // music state
         private var musicState = false
-
     
         @SuppressLint("SetTextI18n", "MissingInflatedId")
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +43,7 @@
             player1score.text = "Player 1 (X) : $player1point"
             player2score.text = "Player 2 (O) : $player2point"
 
+            // get shared-preference for music on/off
             val sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
             musicState = sharedPreferences.getBoolean("music_state", true)
 
@@ -122,7 +124,6 @@
                     } else if (b7 == b8 && b8 == b9 && b7 != "" && b8 != "") {
                         Toast.makeText(this, "Winner is $b7", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b7"
-    //                    newGame()
                         whichPlayerScore(b7)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -133,7 +134,6 @@
                     } else if (b1 == b4 && b4 == b7 && b1 != "" && b4 != "") {
                         Toast.makeText(this, "Winner is $b1", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b1"
-    //                    newGame()
                         whichPlayerScore(b1)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -144,7 +144,6 @@
                     } else if (b2 == b5 && b5 == b8 && b2 != "" && b5 != "") {
                         Toast.makeText(this, "Winner is $b2", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b2"
-    //                    newGame()
                         whichPlayerScore(b2)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -155,7 +154,6 @@
                     } else if (b3 == b6 && b6 == b9 && b3 != "" && b6 != "") {
                         Toast.makeText(this, "Winner is $b3", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b3"
-    //                    newGame()
                         whichPlayerScore(b3)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -166,7 +164,6 @@
                     } else if (b1 == b5 && b5 == b9 && b1 != "" && b5 != "") {
                         Toast.makeText(this, "Winner is $b1", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b1"
-    //                    newGame()
                         whichPlayerScore(b1)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -177,7 +174,6 @@
                     } else if (b3 == b5 && b5 == b7 && b3 != "" && b5 != "") {
                         Toast.makeText(this, "Winner is $b3", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Winner : $b3"
-    //                    newGame()
                         whichPlayerScore(b3)
                         if(musicState) {
                             mediaPlayer_winning.start()
@@ -188,34 +184,13 @@
                     }else if(count==9){
                         Toast.makeText(this, "Match is Draw", Toast.LENGTH_SHORT).show()
                         userTurn.text = "Match Draw"
-    //                    newGame()
-    
-    
-    
+
                     }
     
                 }
             }
         }
-        // Function for restating OR Starting new game automatically
-    //    private fun newGame() {
-    //        Handler().postDelayed({
-    //            btn1.text = ""
-    //            btn2.text = ""
-    //            btn3.text = ""
-    //            btn4.text = ""
-    //            btn5.text = ""
-    //            btn6.text = ""
-    //            btn7.text = ""
-    //            btn8.text = ""
-    //            btn9.text = ""
-    //            flag = 0
-    //            count = 0
-    //            userTurn.text = "Turn : X"
-    //        }, 1000000)
-    //
-    //    }
-    
+
         // fun for checking which player is win
         private fun whichPlayerScore(a : String){
             if(a == "X"){
@@ -224,7 +199,8 @@
                 this.player2point++
             }
         }
-    
+
+        // function for updating player scores
         @SuppressLint("SetTextI18n")
         private fun checkScore(){
             player1score.text = "Player 1 (X) : $player1point"
@@ -235,7 +211,8 @@
         fun restatingMatch(view: View){
             restartGame()
         }
-    
+
+        // function for restarting score to zero
         @SuppressLint("SetTextI18n")
         fun restartScore(view: View){
             startMatch()
@@ -246,7 +223,8 @@
             player2point = 0
             restartGame()
         }
-    
+
+        // function for what to do on restart
         @SuppressLint("SetTextI18n")
         private fun restartGame(){
             startMatch()
@@ -265,7 +243,8 @@
     
     
         }
-    
+
+        // function for stop match
         private fun stopMatch(){
             btn1.isEnabled = false
             btn2.isEnabled = false
@@ -277,11 +256,12 @@
             btn8.isEnabled = false
             btn9.isEnabled = false
         }
-    
+
+        // function for start match
         private fun startMatch(){
-            btn3.isEnabled = true
-            btn2.isEnabled = true
             btn1.isEnabled = true
+            btn2.isEnabled = true
+            btn3.isEnabled = true
             btn4.isEnabled = true
             btn5.isEnabled = true
             btn6.isEnabled = true
@@ -289,6 +269,5 @@
             btn8.isEnabled = true
             btn9.isEnabled = true
         }
-    
-    
+
     }
